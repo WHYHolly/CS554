@@ -1,0 +1,19 @@
+{
+  "name": "554_lab1",
+  "version": "1.0.0",
+  "description": "This is for Hangyu's lab1",
+  "main": "app.js",
+  "scripts": {
+    "seed": "node ./tasks/seed.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "author": "HangyuWang 10444246",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.16.2",
+    "mockjs": "^1.0.1-beta3",
+    "mongodb": "^3.0.2",
+    "uuid": "^3.3.3"
+  }
+}
