@@ -1,0 +1,21 @@
+@import "variables.scss";
+@import "../../node_modules/bootstrap/scss/bootstrap.scss";
+
+body,
+html {
+    background: $background;
+    font-family: $font-family;
+    font-size: $font-size;
+}
+
+.btn-primary {
+    background-color: $btn-color;
+}
+
+a {
+    color: $a-color;
+}
+
+.page-wrap {
+    min-height: $page-wrap-minheight;
+}
