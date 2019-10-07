@@ -5,7 +5,6 @@ import Pokemon from "./Pokemon/Pokemon";
 
 class PokemonContainer extends Component {
   render() {
-    console.log("This is the container");
     return (
       <div>
         <Switch>

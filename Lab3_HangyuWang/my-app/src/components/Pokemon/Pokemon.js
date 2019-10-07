@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
-// import {Link} from 'react-router-dom';
- import noImage from "../../img/download.jpeg";
+import noImage from "../../img/download.jpeg";
 
 class Pokemon extends Component {
   constructor(props) {
@@ -24,22 +23,16 @@ class Pokemon extends Component {
       const response = await axios.get(
         `https://pokeapi.co/api/v2/pokemon/${this.props.match.params.id}`
       );
-      console.log(response.data);
       this.setState({
         data: response.data,
         loading: false
       });
     } catch (e) {
       window.location.assign("http://localhost:3000/PageNotFound");
-      console.log(`error ${e}`);
     }
   }
 
   formateData(data) {
-    if (!data) {
-        return "No Data";
-    }
-    // console.log(data);
 
     const abilitiesArray = data.abilities.map((element, i) => {
         return <li key={i}>{element.ability.name}</li>

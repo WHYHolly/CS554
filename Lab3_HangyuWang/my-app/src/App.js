@@ -50,7 +50,7 @@ class App extends Component {
                <Route path="/pokemon/" component={PokemonContainer} />
                <Route path="/berries/" component={BerriesContainer} />
                <Route path="/machines/" component={MachinesContainer} />
-               <Route path="/PageNotFound" component={PageNotFound} status={404}/>
+               <Route path="/PageNotFound" component={PageNotFound}/>
                <Route render={() =>
                (
                <Redirect to="/PageNotFound" />

@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 import axios from "axios";
-// import {Link} from 'react-router-dom';
-// import noImage from "../../img/download.jpeg";
 
 class Berry extends Component {
   constructor(props) {
@@ -24,13 +22,11 @@ class Berry extends Component {
       const response = await axios.get(
         `https://pokeapi.co/api/v2/berry/${this.props.match.params.id}`
       );
-      console.log(response);
       this.setState({
         data: response.data,
         loading: false
       });
     } catch (e) {
-      console.log(`error ${e}`);
       window.location.assign("http://localhost:3000/PageNotFound");
     }
   }
@@ -39,12 +35,11 @@ class Berry extends Component {
     if (!data) {
         return "No Data";
     }
-    console.log(data.flavors);
+
     const flaArray = data.flavors.map((data, i) => {
       return <li key={i}>Flavor: {data.flavor.name} ===> Potency: {data.potency}</li>
     });
-    
-    //console.log(data.item.name);
+
     return (
       <article className = "container">
           <h1>{data.name}</h1>

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import PageNotFound from "../PageNotFound";
 
 class PokemonList extends Component {
   
@@ -12,25 +13,17 @@ class PokemonList extends Component {
       cur: undefined,
       next: undefined,
       total: undefined,
-      loading: false
+      loading: false,
+      error: false
     };
   }
 
   NumberFilter(cur_in){
     let isnum = /^\d+$/.test(cur_in);
-    //let cur;
+
     if(isnum){
-      //cur = parseInt(cur_in);
       return parseInt(cur_in);
     }else{
-      // return (
-      //   <div>
-      // <Redirect to="/PageNotFound"/>
-      // </div>
-      // );
-      // this.setState({
-      //   error: true
-      // })
       window.location.assign("http://localhost:3000/PageNotFound");
     }
 
@@ -38,12 +31,9 @@ class PokemonList extends Component {
 
   async getShows() {
     try {
-      
       let Offset = this.NumberFilter(this.props.match.params.page);
 
-      console.log("Here the offset: "+Offset);
       const response = await axios.get(`https://pokeapi.co/api/v2/pokemon/?offset=${Offset*20}&limit=20`);
-      console.log(response.data.count);
       
       this.setState({ 
         data: response.data.results,
@@ -53,16 +43,11 @@ class PokemonList extends Component {
         total: response.data.count
       });
     } catch (e) {
-      // this.setState({
-      //   error: true
-      // })
       window.location.assign("http://localhost:3000/PageNotFound");
-      // console.log(e);
     }
   }
 
   componentDidMount() {
-    // this.CurPageUpdate();
     this.getShows();
   }
 
@@ -82,13 +67,12 @@ class PokemonList extends Component {
  
     let prev_page = cur_page-1;
     let nxt_page = cur_page+1;
-    console.log(cur_page);
-    console.log(this.cur_page);
+
     if(cur_page<0 || cur_page>this.state.total/20){
-      // this.setState({
-      //   error: true
-      // })
-      window.location.assign("http://localhost:3000/PageNotFound");
+      this.state({
+        error: true
+      });
+      // window.location.assign("http://localhost:3000/PageNotFound");
     }
     let last_body = (
       <nav aria-label="Page navigation example">
@@ -421,12 +405,18 @@ class PokemonList extends Component {
 
 
   render() {
-    console.log("I have been here");
 
     let body = null;
     let li = null;
-    // this.getShows();
-    li =
+
+    if(this.state.error){
+      body = (
+        <div>
+          <PageNotFound />
+        </div>
+      );
+    }else{
+      li =
         this.state.data &&
         this.state.data.map(show => (
           <li key={show.url.split("/")[6]}>
@@ -434,23 +424,24 @@ class PokemonList extends Component {
           </li>
         ));
 
-    // console.log(this.state.data);
-    let page_body = (this.pagecontrol());
-
-    body = (
-      <div>
-        {page_body}
-        <div className = "container">
-          <ul className = "list-group list-group-flush">{li}</ul>
+      let page_body = (this.pagecontrol());
+      body = (
+        <div>
+          {page_body}
+          <div className = "container">
+            <ul className = "list-group list-group-flush">{li}</ul>
+          </div>
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
         </div>
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-      </div>
-    );
+      );
+    }
+    
+
     return body;
   }
 }

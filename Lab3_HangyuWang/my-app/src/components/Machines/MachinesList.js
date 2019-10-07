@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import PageNotFound from "../PageNotFound";
 
 class MachinesList extends Component {
   
@@ -12,7 +13,8 @@ class MachinesList extends Component {
       cur: undefined,
       next: undefined,
       total: undefined,
-      loading: false
+      loading: false,
+      error: false
     };
   }
 
@@ -20,7 +22,6 @@ class MachinesList extends Component {
     let isnum = /^\d+$/.test(cur_in);
     //let cur;
     if(isnum){
-      //cur = parseInt(cur_in);
       return parseInt(cur_in);
     }else{
       window.location.assign("http://localhost:3000/PageNotFound");
@@ -34,20 +35,10 @@ class MachinesList extends Component {
       
       let Offset = this.NumberFilter(this.props.match.params.page);
 
-      console.log("Here the offset: "+Offset);
       const response = await axios.get(`https://pokeapi.co/api/v2/machine/?offset=${Offset*20}&limit=20`);
-      console.log(response);
       
       let temp_data = response.data.results;
       let data_arr = [];
-      // let OneData;
-      // console.log(temp_data);
-      // for(OneData of temp_data){
-      //   let temp = await axios.get(OneData.url);
-      //   console.log(OneData.url);
-      //   data_arr.push(temp.data);
-      // }
-      // console.log(data_arr);
 
       data_arr.length = temp_data.length;
       let new_arr = Array(temp_data.length).fill().map((v,i)=>i);
@@ -61,12 +52,10 @@ class MachinesList extends Component {
       });
     } catch (e) {
       window.location.assign("http://localhost:3000/PageNotFound");
-      // console.log(e);
     }
   }
 
   componentDidMount() {
-    // this.CurPageUpdate();
     this.getShows();
   }
 
@@ -86,11 +75,12 @@ class MachinesList extends Component {
  
     let prev_page = cur_page-1;
     let nxt_page = cur_page+1;
-    // console.log("Here is the page control");
-    // console.log(cur_page);
-    // console.log(this.cur_page);
+
     if(cur_page<0 || cur_page>this.state.total/20){
-      window.location.assign("http://localhost:3000/PageNotFound");
+      this.state({
+        error: true
+      });
+      // window.location.assign("http://localhost:3000/PageNotFound");
     }
 
     let last_body = (
@@ -426,34 +416,39 @@ class MachinesList extends Component {
     let body = null;
     let li = null;
 
-    console.log(this.state.total);
-
-    li = 
-        this.state.data &&
-        this.state.data.map((show, index) => (
-          <li key={this.state.cur+index+1}>
-            <Link className="list-group-item list-group-item-action" to={`/machines/${this.state.cur*20+index+1}`}>machine with ID{this.state.cur*20+index+1}</Link>
-          </li>
-        ));
-    console.log(li);
-
-    // console.log(this.state.data);
-    let page_body = (this.pagecontrol());
-
-    body = (
-      <div>
-        {page_body}
-        <div className = "container">
-          <ul className = "list-group list-group-flush">{li}</ul>
+    if(this.state.error){
+      body = (
+        <div>
+          <PageNotFound />
         </div>
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-      </div>
-    );
+      );
+    }else{
+
+      li = 
+          this.state.data &&
+          this.state.data.map((show, index) => (
+            <li key={this.state.cur+index+1}>
+              <Link className="list-group-item list-group-item-action" to={`/machines/${this.state.cur*20+index+1}`}>machine with ID{this.state.cur*20+index+1}</Link>
+            </li>
+          ));
+
+      let page_body = (this.pagecontrol());
+
+      body = (
+        <div>
+          {page_body}
+          <div className = "container">
+            <ul className = "list-group list-group-flush">{li}</ul>
+          </div>
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+        </div>
+      );
+    }
     return body;
   }
 }

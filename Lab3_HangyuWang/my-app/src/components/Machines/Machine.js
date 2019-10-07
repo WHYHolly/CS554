@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 import axios from "axios";
-// import {Link} from 'react-router-dom';
-// import noImage from "../../img/download.jpeg";
 
 class Machine extends Component {
   constructor(props) {
@@ -24,14 +22,12 @@ class Machine extends Component {
       const response = await axios.get(
         `https://pokeapi.co/api/v2/machine/${this.props.match.params.id}`
       );
-      console.log(response);
       this.setState({
         data: response.data,
         loading: false
       });
     } catch (e) {
       window.location.assign("http://localhost:3000/PageNotFound");
-      console.log(`error ${e}`);
     }
   }
 
@@ -40,7 +36,6 @@ class Machine extends Component {
         return "No Data";
     }
     
-    console.log(data.item.name);
     return (
         <article className="container">
             <h1>Machine with ID{data.id}</h1>
