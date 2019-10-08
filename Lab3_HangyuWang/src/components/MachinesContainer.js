@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, Redirect } from "react-router-dom";
 import MachinesList from "./Machines/MachinesList";
 import Machine from "./Machines/Machine";
 
@@ -10,6 +10,10 @@ class MachinesContainer extends Component {
         <Switch>
           <Route path="/machines/page/:page" component={MachinesList} />
           <Route path="/machines/:id" component={Machine} />
+          <Route render={() =>
+               (
+               <Redirect to="/PageNotFound" />
+               )}/>
         </Switch>
       </div>
     );
