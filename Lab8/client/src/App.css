@@ -1,0 +1,52 @@
+@import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 80px;
+}
+
+.App-header {
+  background-color: #1e8678;
+  height: 175px;
+  padding: 20px;
+  color: #222;
+}
+
+.App-link {
+  color: #09d3ac;
+}
+
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  padding: 20px;
+  background-color: #007f71;
+  color: #f6f6f6;
+  text-align: center;
+}
+
+.page-link {
+  color: #178577;
+}
+
+.page-link:hover {
+  color: #09d3ac;
+}
+
+.list-unstyled {
+  text-align: center;
+  color: #178577;
+}
+.list-unstyled:hover {
+  text-align: center;
+}
+
+.mergin-right150 {
+  margin-right: 100px;
+}
