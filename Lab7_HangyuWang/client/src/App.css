@@ -1,0 +1,71 @@
+@import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 80px;
+}
+
+.App-header {
+  background-color: #1e8678;
+  height: 175px;
+  padding: 20px;
+  color: #222;
+}
+
+.App-link {
+  color: #09d3ac;
+}
+
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  padding: 20px;
+  background-color: #007f71;
+  color: #f6f6f6;
+  text-align: center;
+}
+
+.page-link {
+  color: #178577;
+}
+
+.page-link:hover {
+  color: #09d3ac;
+}
+
+.list-unstyled {
+  text-align: center;
+  color: #178577;
+}
+.list-unstyled:hover {
+  text-align: center;
+}
+
+.mergin-right150 {
+  margin-right: 100px;
+}
+
+.moreButton{
+  background-color: #1e8678; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 20px;
+  margin: 4px 2px;
+  cursor: pointer;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+}
+
+.moreButton:hover {
+  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+}

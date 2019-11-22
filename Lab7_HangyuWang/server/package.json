@@ -1,0 +1,29 @@
+{
+	"name": "lab7-server",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"start": "node index.js",
+		"server": "nodemon ./index.js"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "MIT",
+	"dependencies": {
+		"apollo-datasource-rest": "^0.6.6",
+		"apollo-server": "^2.4.8",
+		"apollo-server-cache-redis": "^1.1.4",
+		"axios": "^0.18.1",
+		"graphql": "^14.2.1",
+		"lodash": "^4.17.15",
+		"node-fetch": "^2.6.0",
+		"node-uuid": "^1.4.8",
+		"unsplash-js": "^6.0.0"
+	},
+	"devDependencies": {
+		"concurrently": "^3.5.0",
+		"nodemon": "^1.19.4"
+	}
+}
