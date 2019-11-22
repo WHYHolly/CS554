@@ -25,21 +25,28 @@ class Popularity extends Component {
               console.log("there's an error:", error);
             } if (loading) {
               console.log("is loading...")
-              return <p>loading...</p>
+              return <h1>Loading...</h1>
             }
-            console.log("data", data);
+            // console.log("data", data);
             const photos = data.getTopTenBinnedPosts || [];
 
-            console.log("my photos:", photos)
+            // console.log("my photos:", photos)
             
             var totalbins = photos.reduce(function (accumulator, photo) {
                 return accumulator + photo.num_binned;
               }, 0);
-            var category = "Non-mainstream";
-            if (totalbins > 200){
+            var category;
+            if(photos.length == 0){
+              category = "No binned photos"
+            }else{
+              if (totalbins > 200){
                 category = "Mainstream";
+              }else{
+                category = "Non-mainstream";
+              }
             }
-            console.log("my photos:", photos)
+            
+            // console.log("my photos:", photos)
             li =  photos &&
                   photos.map(photo => (
                     <li>

@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { Query } from "react-apollo";
 import { Mutation } from "react-apollo";
 import query from "../queries";
-// import { useQuery } from '@apollo/react-hooks';
 
 class ListPhotos extends Component {
 
@@ -17,7 +16,7 @@ class ListPhotos extends Component {
   }
 
   handleClick() {
-    console.log('Click happened');
+    // console.log('Click happened');
     this.setState({ 
       pageNum: this.state.pageNum + 1
     });
@@ -41,7 +40,7 @@ class ListPhotos extends Component {
             fetchPolicy={"network-only"}>
               {({ loading, error, data }) => {
                 if (error) {
-                  console.log("there's an error:", error);
+                  // console.log("there's an error:", error);
                 } if (loading) {
                   //console.log("is loading...")
                   return (          
@@ -51,13 +50,13 @@ class ListPhotos extends Component {
                   );
                 }
                 
-                console.log("data", data);
+                // console.log("data", data);
                 const photos = data.unsplashImages || [];
-                console.log("my photos:", photos)
+                // console.log("my photos:", photos)
                 
                 function likeClick(updateImage, photo){
-                  console.log("like cliked")
-                  console.log({photo})
+                  // console.log("like cliked")
+                  // console.log({photo})
                   var newliked = true
                   if (photo.binned){
                     newliked = false
@@ -65,7 +64,7 @@ class ListPhotos extends Component {
                   else{
                     newliked = true
                   }
-                  console.log({newliked})
+                  // console.log({newliked})
                   updateImage({ variables: { 
                     id: photo.id,
                     liked: newliked
@@ -107,7 +106,7 @@ class ListPhotos extends Component {
                       <ul className = "list-group list-group-flush">{li}</ul>
                     </div>
                     
-                    <button onClick={() => this.handleClick()}>More Photos</button>
+                    <button class = "moreButton" onClick={() => this.handleClick()}>More</button>
                     <br />
                     <br />
                     <br />

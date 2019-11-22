@@ -56,18 +56,19 @@ class MyPhotos extends Component {
           {({ loading, error, data }) => {
             if (error) {
               console.log("there's an error:", error);
+
             } if (loading) {
-              console.log("is loading...")
-              return <p>loading...</p>
+              // console.log("is loading...")
+              return <h1>loading...</h1>
             }
-            console.log("data", data);
+            // console.log("data", data);
             const photos = data.userPostedImages || [];
 
-            console.log("my posted photos:", photos)
+            // console.log("my posted photos:", photos)
             
             function likeClick(updateImage, photo){
-              console.log("like cliked")
-              console.log({photo})
+              // console.log("like cliked")
+              // console.log({photo})
               var newliked = true
               if (photo.binned){
                 newliked = false
@@ -75,7 +76,7 @@ class MyPhotos extends Component {
               else{
                 newliked = true
               }
-              console.log({newliked})
+              // console.log({newliked})
               updateImage({ variables: { 
                 id: photo.id,
                 liked: newliked

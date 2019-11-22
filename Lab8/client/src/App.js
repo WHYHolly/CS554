@@ -57,7 +57,7 @@ class App extends Component {
                      </Link>
                   </li>
                   <li className="nav-item">
-                     <Link className="nav-link" to="/my-top">
+                     <Link className="nav-link" to="/popularity">
                      Popularity
                      <span className="sr-only">New Post</span>
                      </Link>
@@ -77,7 +77,7 @@ class App extends Component {
                <Route path="/my-posts" component={MyPhotos} />
                <Route path="/my-bin" component={MyLikes} />
                <Route path="/new-post" component={NewPost} />
-               <Route path="/my-top" component={Popularity} />
+               <Route path="/popularity" component={Popularity} />
                <Route render={() =>
                (
                <Redirect to="/ErrorPage" />

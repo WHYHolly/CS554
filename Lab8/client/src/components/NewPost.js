@@ -21,8 +21,9 @@ class NewPost extends Component {
     let inputDesp = null;
     return (
       <div>
-        url:
-        <input
+    
+        {/* <p>url:</p>
+        <input placeholder="Here is url"
             ref={node => {
                 inputURL = node;
                 // this.setState({
@@ -31,10 +32,11 @@ class NewPost extends Component {
                 console.log("Here is the input of inputURL");
                 console.log(inputURL);
             }}
+            required
         />
         <br />
-        description:
-        <input
+        <p>description:</p>
+        <input placeholder="Here is description"
             ref={node => {
                 inputDesp = node;
                 // this.setState({
@@ -43,7 +45,8 @@ class NewPost extends Component {
                 console.log("Here is the input of des");
                 console.log(inputDesp);
             }}
-        />
+        /> */}
+    
         <Mutation mutation={query.UploadMyPhotos}>
         {(uploadImage, { data }) => (
         <div>
@@ -66,7 +69,31 @@ class NewPost extends Component {
                 alert("Photo Added");
             }}
             >
-            
+            <p>url:</p>
+        <input placeholder="Here is url"
+            type="url"
+            ref={node => {
+                inputURL = node;
+                // this.setState({
+                //     url: node
+                // })
+                console.log("Here is the input of inputURL");
+                console.log(inputURL);
+            }}
+            required
+        />
+        <br />
+        <p>description:</p>
+        <input placeholder="Here is description"
+            ref={node => {
+                inputDesp = node;
+                // this.setState({
+                //     description: node
+                // })
+                console.log("Here is the input of des");
+                console.log(inputDesp);
+            }}
+        />
             <br />
             
             <button type="submit">Add Photo</button>

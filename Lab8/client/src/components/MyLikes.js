@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Query, Mutation } from "react-apollo";
 import query from "../queries";
 // import { useQuery } from '@apollo/react-hooks';
+// import queries from "../queries";
 
 class MyLikes extends Component {
 
@@ -67,7 +68,17 @@ class MyLikes extends Component {
                   <p>Description: {photo.description}</p>
                   <p>Author: {photo.poster_name}</p>
                   
-                  <Mutation mutation={query.UpdatePhotos}>
+                  <Mutation 
+                    mutation={query.UpdatePhotos}
+                    refetchQueries={() => {
+                      // console.log("refetchQueries")
+                        return [
+                          {
+                            query: query.GET_MyLikes
+                          }
+                        ];
+                    }}
+                  >
                   {(updateImage, { data }) => (
                     
                     <button onClick={() => likeClick(updateImage, photo)}>{bottomText}</button>

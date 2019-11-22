@@ -34,7 +34,7 @@ class DeletePhotos extends Component {
     };
     this.handleOpenDelete = this.handleOpenDelete.bind(this);
     this.handleCloseDelete = this.handleCloseDelete.bind(this);
-    console.log(this.state.photo);
+    // console.log(this.state.photo);
   }
 
   handleOpenDelete() {
@@ -64,6 +64,14 @@ class DeletePhotos extends Component {
 					*/}
           <Mutation
             mutation={queries.DeletePhotos}
+            refetchQueries={() => {
+              // console.log("refetchQueries")
+                return [
+                  {
+                    query: queries.Get_MyPhotos
+                  }
+                ];
+            }}
             // update={(cache, { data: { deleteImage } }) => {
             //   const {photos} = cache.readQuery({
             //       query: queries.Get_MyPhotos

@@ -26,8 +26,7 @@ const resolvers = {
                                     }
                                     return p;
                                   })
-        return Photos
-        ;
+        return Photos;
         // post_val.find(p => p.id == id).binned = true;
 
       }else{
@@ -73,7 +72,7 @@ const resolvers = {
   
   Mutation: {
     uploadImage: async (_, { url, description }, { cache }) =>{
-      console.log(url);
+      // console.log(url);
       //console.log(description);
       let newid = uuid.v4();
       const photoInfo = {
@@ -120,8 +119,8 @@ const resolvers = {
 
       if(liked_list != null){
         liked_val = JSON.parse(liked_list);
-        lodash.remove(liked_val, p => {
-          p.id = id;
+        lodash.remove(liked_val, function(p) {
+          return p.id == id;
         });
         await cache.set(LIST_KEY.MYLIKED, JSON.stringify(liked_val), {ttl: DEFAULT_FLUSH_TIME});
       }
@@ -137,7 +136,7 @@ const resolvers = {
       let liked_list = await cache.get(LIST_KEY.MYLIKED);
       // for the changing of liked
       if(liked === true){
-        console.log("Here the liked is true");
+        // console.log("Here the liked is true");
         let photoInfo;
         if (post_list != null) {
           // console.log("Here the test is");
@@ -153,13 +152,14 @@ const resolvers = {
         if(photoInfo == null){
           //console.log("Here is the log");
           photoInfo = await dataSources.UnsplashAPI.getPhotosById(id);
-          //console.log(photoInfo);
+          // console.log(photoInfo);
         }
         if(photoInfo != null){
+          photoInfo.binned = true;
           if (liked_list != null) {
             let val = JSON.parse(liked_list);
             // console.log(val);
-            photoInfo.binned = true;
+            // photoInfo.binned = true;
             Test_val = val.find(p => p.id == id);
             if(Test_val == undefined){
               val.push(photoInfo);
@@ -167,7 +167,7 @@ const resolvers = {
             await cache.set(LIST_KEY.MYLIKED, JSON.stringify(val), {ttl: DEFAULT_FLUSH_TIME});
           } else {
             let val = [photoInfo];
-            console.log("typeof cache:", typeof(cache))
+            // console.log("typeof cache:", typeof(cache))
             await cache.set(LIST_KEY.MYLIKED, JSON.stringify(val), {ttl: DEFAULT_FLUSH_TIME});
           }
         }
@@ -200,7 +200,7 @@ const resolvers = {
       // for the changing of others
       let newPhoto;
       //update my post!!!
-      console.log("change others")
+      // console.log("change others")
       if (post_list != null) {
         let post_val = JSON.parse(post_list);
         // console.log(post_val);
@@ -233,12 +233,12 @@ const resolvers = {
       //update binned
       if (liked_list != null) {
         let liked_val = JSON.parse(liked_list);
-        console.log(liked_val);
-        console.log("////////////////////////");
+        // console.log(liked_val);
+        // console.log("////////////////////////");
         // flag = false;
         liked_val = liked_val.map( p => {
-          console.log("In the map");
-          console.log(p.id === id);
+          // console.log("In the map");
+          // console.log(p.id === id);
           if (p.id === id) {
             newPhoto = p;
             if (url) {
@@ -252,7 +252,7 @@ const resolvers = {
             return p;
           }
         });
-        console.log("test");
+        // console.log("test");
         // console.log(flag);
         if(newPhoto != null ){
           await cache.set(LIST_KEY.MYLiked, JSON.stringify(liked_val), {ttl: DEFAULT_FLUSH_TIME});
